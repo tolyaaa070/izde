@@ -29,7 +29,7 @@ class AgentCreateSerializer(serializers.ModelSerializer):
 class AmenitySerializers(serializers.ModelSerializer):
     class Meta :
         model = Amenity
-        fields = '__all__'
+        fields = ['amenities']
 
 class HousesSerializers(serializers.ModelSerializer):
     class Meta:
@@ -42,6 +42,7 @@ class ReviewsSerializers(serializers.ModelSerializer):
         fields = ['houses','rating','comment']
 
 class HousesListAPISerializers(serializers.ModelSerializer):
+    amenity = AmenitySerializers(read_only=True, many=True)
     get_avg_rating = serializers.SerializerMethodField()
     class Meta :
         model = Houses
